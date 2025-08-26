@@ -7,5 +7,6 @@ namespace FIFO_Infineon.Models
         [Key] public string? ItemID { get; set; }
         [Required] public string? NamaItem { get; set; }
         public string? DeskripsiItem { get; set; }
+        public string? Kategori { get; set; }
     }
 }
