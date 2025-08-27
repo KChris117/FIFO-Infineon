@@ -15,6 +15,7 @@ namespace FIFO_Infineon.Controllers
         public async Task<IActionResult> DisposalStockItem()
         {
             var stockList = await _context.StockItems
+                .Where(s => s.MasterItem != null && s.MasterItem.Kategori == "Disposal")
                 .Include(s => s.MasterItem)
                 .OrderBy(s => s.TanggalMasuk)
                 .ToListAsync();
@@ -27,13 +28,28 @@ namespace FIFO_Infineon.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MasterItemID,Jumlah")] StockItem stockItem)
         {
-            var masterItem = await _context.MasterItems.FindAsync(stockItem.MasterItemID);
-            if (masterItem == null)
+            var existingMasterItem = await _context.MasterItems.FindAsync(stockItem.MasterItemID);
+
+            if (existingMasterItem == null)
             {
-                ModelState.AddModelError("MasterItemID", "Item ID tidak ditemukan.");
-                return View(stockItem);
+                // Untuk saat ini, kita akan asumsikan NamaItem dan DeskripsiItem kosong
+                // Di masa depan, Anda bisa menambahkan input untuk ini di formulir Create
+                var newMasterItem = new MasterItem
+                {
+                    ItemID = stockItem.MasterItemID,
+                    NamaItem = "Nama Item Belum Ditentukan",
+                    DeskripsiItem = "Deskripsi Item Belum Ditentukan",
+                    Kategori = "Disposal",
+                };
+                _context.MasterItems.Add(newMasterItem);
+                await _context.SaveChangesAsync(); // Simpan MasterItem yang baru dibuat
+                stockItem.MasterItem = newMasterItem;
             }
-            stockItem.MasterItem = masterItem;
+            else
+            {
+                stockItem.MasterItem = existingMasterItem;
+            }
+
             ModelState.Remove("MasterItem");
             if (ModelState.IsValid)
             {
@@ -42,6 +58,7 @@ namespace FIFO_Infineon.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(DisposalStockItem));
             }
+
             return View(stockItem);
         }
 

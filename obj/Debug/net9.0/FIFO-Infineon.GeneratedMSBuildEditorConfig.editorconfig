@@ -17,57 +17,81 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = FIFO_Infineon
 build_property.RootNamespace = FIFO_Infineon
-build_property.ProjectDir = C:\Users\ACER\Documents\GitHub\FIFO-Infineon\
+build_property.ProjectDir = C:\File Magang\FIFO-Infineon\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\ACER\Documents\GitHub\FIFO-Infineon
+build_property.MSBuildProjectDirectory = C:\File Magang\FIFO-Infineon
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/ACER/Documents/GitHub/FIFO-Infineon/Views/Chemical/ChemicalStockItem.cshtml]
+[C:/File Magang/FIFO-Infineon/Views/Chemical/ChemicalStockItem.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlbWljYWxcQ2hlbWljYWxTdG9ja0l0ZW0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ACER/Documents/GitHub/FIFO-Infineon/Views/Chemical/Create.cshtml]
+[C:/File Magang/FIFO-Infineon/Views/Chemical/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlbWljYWxcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ACER/Documents/GitHub/FIFO-Infineon/Views/Home/Index.cshtml]
+[C:/File Magang/FIFO-Infineon/Views/Disposal/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlzcG9zYWxcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/File Magang/FIFO-Infineon/Views/Disposal/DisposalStockItem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlzcG9zYWxcRGlzcG9zYWxTdG9ja0l0ZW0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/File Magang/FIFO-Infineon/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ACER/Documents/GitHub/FIFO-Infineon/Views/Home/Privacy.cshtml]
+[C:/File Magang/FIFO-Infineon/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ACER/Documents/GitHub/FIFO-Infineon/Views/Shared/Error.cshtml]
+[C:/File Magang/FIFO-Infineon/Views/PPE/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUFBFXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/File Magang/FIFO-Infineon/Views/PPE/PPEStockItem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUFBFXFBQRVN0b2NrSXRlbS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/File Magang/FIFO-Infineon/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ACER/Documents/GitHub/FIFO-Infineon/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/File Magang/FIFO-Infineon/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ACER/Documents/GitHub/FIFO-Infineon/Views/Stock/Create.cshtml]
+[C:/File Magang/FIFO-Infineon/Views/Stock/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvY2tcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ACER/Documents/GitHub/FIFO-Infineon/Views/Stock/Index.cshtml]
+[C:/File Magang/FIFO-Infineon/Views/Stock/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvY2tcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ACER/Documents/GitHub/FIFO-Infineon/Views/_ViewImports.cshtml]
+[C:/File Magang/FIFO-Infineon/Views/Tool/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9vbFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/File Magang/FIFO-Infineon/Views/Tool/ToolStockItem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9vbFxUb29sU3RvY2tJdGVtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/File Magang/FIFO-Infineon/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ACER/Documents/GitHub/FIFO-Infineon/Views/_ViewStart.cshtml]
+[C:/File Magang/FIFO-Infineon/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ACER/Documents/GitHub/FIFO-Infineon/Views/Shared/_Layout.cshtml]
+[C:/File Magang/FIFO-Infineon/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-8bm3id8k1j

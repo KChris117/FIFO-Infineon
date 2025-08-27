@@ -1,11 +1,11 @@
 @{ ViewData["Title"] = "Pilih Kategori"; }
 <div class="text-center">
     <h1 class="display-4">Pilih Kategori Barang</h1>
-    <p>Silahkan pilih kategori di bawah ini untuk melihat inventory</p>
-    <div class="mt-5"d-grid gap-3 col-6 mx-auto>
+    <p>Silakan pilih kategori di bawah ini untuk melihat inventaris.</p>
+    <div class="mt-5 d-grid gap-3 col-6 mx-auto">
         <a asp-controller="Chemical" asp-action="ChemicalStockItem" class="btn btn-primary btn-lg">Chemical</a>
         <a asp-controller="Disposal" asp-action="DisposalStockItem" class="btn btn-primary btn-lg">Disposal</a>
-        <a asp-controller="PPE" asp-action="PPEStockItem" class="btn btn-primary btn-lg">PPE</a>
+        <a asp-controller="Ppe" asp-action="PpeStockItem" class="btn btn-primary btn-lg">PPE</a>
         <a asp-controller="Tool" asp-action="ToolStockItem" class="btn btn-primary btn-lg">Tool</a>
     </div>
 </div>

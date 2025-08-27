@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace FIFO_Infineon.Controllers
 {
-    public class ChemicalController : Controller
+    public class ToolController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ChemicalController(ApplicationDbContext context)
+        public ToolController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public async Task<IActionResult> ChemicalStockItem()
+        public async Task<IActionResult> ToolStockItem()
         {
             var stockList = await _context.StockItems
-                .Where(s => s.MasterItem != null && s.MasterItem.Kategori == "Chemical")
+                .Where(s => s.MasterItem != null && s.MasterItem.Kategori == "Tool")
                 .Include(s => s.MasterItem)
                 .OrderBy(s => s.TanggalMasuk)
                 .ToListAsync();
@@ -46,7 +46,7 @@ namespace FIFO_Infineon.Controllers
                     ItemID = stockItem.MasterItemID,
                     NamaItem = "Nama Item Belum Ditentukan",
                     DeskripsiItem = "Deskripsi Item Belum Ditentukan",
-                    Kategori = "Chemical",
+                    Kategori = "Tool",
                 };
                 _context.MasterItems.Add(newMasterItem);
                 await _context.SaveChangesAsync(); // Simpan MasterItem yang baru dibuat
@@ -63,7 +63,7 @@ namespace FIFO_Infineon.Controllers
                 stockItem.TanggalMasuk = DateTime.Now;
                 _context.Add(stockItem);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(ChemicalStockItem));
+                return RedirectToAction(nameof(ToolStockItem));
             }
 
             return View(stockItem);
