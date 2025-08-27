@@ -193,7 +193,6 @@ C:\File Magang\FIFO-Infineon\obj\Debug\net9.0\refint\FIFO-Infineon.dll
 C:\File Magang\FIFO-Infineon\obj\Debug\net9.0\FIFO-Infineon.pdb
 C:\File Magang\FIFO-Infineon\obj\Debug\net9.0\FIFO-Infineon.genruntimeconfig.cache
 C:\File Magang\FIFO-Infineon\obj\Debug\net9.0\ref\FIFO-Infineon.dll
-C:\File Magang\FIFO-Infineon\obj\Debug\net9.0\compressed\mfiirr7eb3-8br2o200jg.gz
 C:\Users\ACER\Documents\GitHub\FIFO-Infineon\bin\Debug\net9.0\appsettings.Development.json
 C:\Users\ACER\Documents\GitHub\FIFO-Infineon\bin\Debug\net9.0\appsettings.json
 C:\Users\ACER\Documents\GitHub\FIFO-Infineon\bin\Debug\net9.0\FIFO-Infineon.staticwebassets.runtime.json
@@ -390,3 +389,4 @@ C:\Users\ACER\Documents\GitHub\FIFO-Infineon\obj\Debug\net9.0\refint\FIFO-Infine
 C:\Users\ACER\Documents\GitHub\FIFO-Infineon\obj\Debug\net9.0\FIFO-Infineon.pdb
 C:\Users\ACER\Documents\GitHub\FIFO-Infineon\obj\Debug\net9.0\FIFO-Infineon.genruntimeconfig.cache
 C:\Users\ACER\Documents\GitHub\FIFO-Infineon\obj\Debug\net9.0\ref\FIFO-Infineon.dll
+C:\File Magang\FIFO-Infineon\obj\Debug\net9.0\compressed\mfiirr7eb3-qbm6afemqa.gz
