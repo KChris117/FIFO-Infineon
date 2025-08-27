@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using FIFO_Infineon.Models;
 using FIFO_Infineon.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,6 +29,14 @@ namespace FIFO_Infineon.Controllers
 
         public IActionResult Create()
         {
+            var chemicalItems = _context.MasterItems
+                .Where(m => m.Kategori == "Chemical")
+                .OrderBy(m => m.ItemID)
+                .ToList();
+
+            // Properti kedua dan ketiga di SelectList harus sama
+            ViewData["MasterItemID"] = new SelectList(chemicalItems, "ItemID", "ItemID");
+
             return View();
         }
 
@@ -69,6 +78,61 @@ namespace FIFO_Infineon.Controllers
             return View(stockItem);
         }
 
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            // Ganti `StockItemID` menjadi `Id`
+            var stockItem = await _context.StockItems
+                .Include(s => s.MasterItem)
+                .FirstOrDefaultAsync(m => m.Id == id); // Perbaikan di sini
+
+            if (stockItem == null)
+            {
+                return NotFound();
+            }
+
+            return View(stockItem);
+        }
+
+        // Tambahkan metode Delete
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            // Ganti `StockItemID` menjadi `Id`
+            var stockItem = await _context.StockItems
+                .Include(s => s.MasterItem)
+                .FirstOrDefaultAsync(m => m.Id == id); // Perbaikan di sini
+
+            if (stockItem == null)
+            {
+                return NotFound();
+            }
+
+            return View(stockItem);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var stockItem = await _context.StockItems.FindAsync(id);
+            if (stockItem != null)
+            {
+                _context.StockItems.Remove(stockItem);
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(ChemicalStockItem));
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetItemDetails(string id)
         {
@@ -76,6 +140,52 @@ namespace FIFO_Infineon.Controllers
             var masterItem = await _context.MasterItems.FindAsync(id);
             if (masterItem == null) return NotFound();
             return Json(new { namaItem = masterItem.NamaItem, deskripsiItem = masterItem.DeskripsiItem });
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Jumlah")] StockItem stockItem)
+        {
+            if (id != stockItem.Id)
+            {
+                return NotFound();
+            }
+            
+            // Temukan item yang akan diedit di database
+            var itemToUpdate = await _context.StockItems
+                .Include(s => s.MasterItem)
+                .FirstOrDefaultAsync(s => s.Id == id);
+
+            if (itemToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            // Perbarui properti yang dibutuhkan
+            itemToUpdate.Jumlah = stockItem.Jumlah;
+            
+            try
+            {
+                _context.Update(itemToUpdate);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!StockItemExists(itemToUpdate.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(ChemicalStockItem));
+        }
+
+        private bool StockItemExists(int id)
+        {
+        return _context.StockItems.Any(e => e.Id == id);
         }
     }
 }

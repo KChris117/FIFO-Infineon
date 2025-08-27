@@ -315,7 +315,6 @@ C:\Users\ACER\Documents\GitHub\FIFO-Infineon\obj\Debug\net9.0\rjsmcshtml.dswa.ca
 C:\Users\ACER\Documents\GitHub\FIFO-Infineon\obj\Debug\net9.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\ACER\Documents\GitHub\FIFO-Infineon\obj\Debug\net9.0\scopedcss\bundle\FIFO-Infineon.styles.css
 C:\Users\ACER\Documents\GitHub\FIFO-Infineon\obj\Debug\net9.0\scopedcss\projectbundle\FIFO-Infineon.bundle.scp.css
-C:\Users\ACER\Documents\GitHub\FIFO-Infineon\obj\Debug\net9.0\compressed\mfiirr7eb3-8br2o200jg.gz
 C:\Users\ACER\Documents\GitHub\FIFO-Infineon\obj\Debug\net9.0\compressed\txoiws1v7t-61n19gt1b8.gz
 C:\Users\ACER\Documents\GitHub\FIFO-Infineon\obj\Debug\net9.0\compressed\di6dy7oa9v-xtxxf3hu2r.gz
 C:\Users\ACER\Documents\GitHub\FIFO-Infineon\obj\Debug\net9.0\compressed\aadi6v785q-t1cqhe9u97.gz
@@ -390,3 +389,4 @@ C:\Users\ACER\Documents\GitHub\FIFO-Infineon\obj\Debug\net9.0\FIFO-Infineon.pdb
 C:\Users\ACER\Documents\GitHub\FIFO-Infineon\obj\Debug\net9.0\FIFO-Infineon.genruntimeconfig.cache
 C:\Users\ACER\Documents\GitHub\FIFO-Infineon\obj\Debug\net9.0\ref\FIFO-Infineon.dll
 C:\File Magang\FIFO-Infineon\obj\Debug\net9.0\compressed\mfiirr7eb3-qbm6afemqa.gz
+C:\Users\ACER\Documents\GitHub\FIFO-Infineon\obj\Debug\net9.0\compressed\mfiirr7eb3-qbm6afemqa.gz

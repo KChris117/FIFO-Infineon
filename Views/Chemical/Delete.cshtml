@@ -1,0 +1,42 @@
+@model FIFO_Infineon.Models.StockItem
+@{
+    ViewData["Title"] = "Hapus Stok";
+}
+
+<h1>@ViewData["Title"]</h1>
+<h3>Anda yakin ingin menghapus item ini?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Item ID
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MasterItemID)
+        </dd>
+        <dt class="col-sm-2">
+            Nama Barang
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MasterItem.NamaItem)
+        </dd>
+        <dt class="col-sm-2">
+            Jumlah
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Jumlah)
+        </dd>
+        <dt class="col-sm-2">
+            Tanggal Masuk
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TanggalMasuk)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Hapus" class="btn btn-danger" /> |
+        <a asp-action="ChemicalStockItem">Kembali ke Daftar</a>
+    </form>
+</div>
