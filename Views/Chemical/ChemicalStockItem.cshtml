@@ -9,6 +9,9 @@
         <a asp-action="Create" class="btn btn-custom-primary me-2">
             <i class="fas fa-plus-circle"></i> Add Item
         </a>
+         <a asp-action="Out" class="btn btn-danger">
+            <i class="fas fa-minus-circle"></i> Withdraw Item
+        </a>
     </div>
 </div>
 
@@ -62,7 +65,9 @@
 </table>
 <div class="mt-5">
     <h1 class="display-4">Stock Chart - Chemical</h1>
+    <div class="chart-container" style="position: relative; height: 720px; width: 640px">
     <canvas id="stockChart"></canvas>
+    </div>
     </div>
     
     @section Scripts {

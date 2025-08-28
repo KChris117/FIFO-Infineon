@@ -44,6 +44,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlbWljYWxcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/File Magang/FIFO-Infineon/Views/Chemical/Out.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlbWljYWxcT3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/File Magang/FIFO-Infineon/Views/Disposal/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlzcG9zYWxcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -60,6 +64,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlzcG9zYWxcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/File Magang/FIFO-Infineon/Views/Disposal/Out.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlzcG9zYWxcT3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/File Magang/FIFO-Infineon/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -74,6 +82,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/File Magang/FIFO-Infineon/Views/PPE/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUFBFXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/File Magang/FIFO-Infineon/Views/PPE/Out.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUFBFXE91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/File Magang/FIFO-Infineon/Views/PPE/PPEStockItem.cshtml]
@@ -106,6 +118,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/File Magang/FIFO-Infineon/Views/Tool/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9vbFxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/File Magang/FIFO-Infineon/Views/Tool/Out.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9vbFxPdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/File Magang/FIFO-Infineon/Views/Tool/ToolStockItem.cshtml]

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace FIFO_Infineon.Controllers
 {
@@ -189,10 +190,85 @@ namespace FIFO_Infineon.Controllers
             }
             return RedirectToAction(nameof(ChemicalStockItem));
         }
+        
+        // GET: Tampilkan formulir untuk mengeluarkan barang
+        public IActionResult Out()
+        {
+            // Ambil daftar MasterItem yang sesuai untuk dropdown
+            var chemicalItems = _context.MasterItems
+                .Where(m => m.Category == "Chemical")
+                .OrderBy(m => m.ItemName) // Urutkan berdasarkan nama item
+                .ToList();
 
+            // Properti kedua dan ketiga di SelectList harus sesuai dengan nama properti MasterItem
+            ViewData["MasterItemID"] = new SelectList(chemicalItems, "ItemID", "ItemName");
+
+            return View();
+        }
+
+        // POST: Proses pengeluaran barang
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Out([Bind("MasterItemID,Quantity")] StockItem model)
+        {
+            // Hapus validasi MasterItem jika tidak ingin error
+            ModelState.Remove("MasterItem");
+
+            if (!ModelState.IsValid)
+            {
+                // Jika ada kesalahan validasi (misalnya kuantitas negatif), tampilkan kembali form
+                var chemicalItems = await _context.MasterItems
+                    .Where(m => m.Category == "Chemical")
+                    .OrderBy(m => m.ItemName)
+                    .ToListAsync();
+                ViewData["MasterItemID"] = new SelectList(chemicalItems, "ItemID", "ItemName", model.MasterItemID);
+                return View(model);
+            }
+
+            var stocksToDeplete = await _context.StockItems
+                .Where(s => s.MasterItemID == model.MasterItemID)
+                .OrderBy(s => s.EntryDate) // Urutkan berdasarkan tanggal masuk (FIFO)
+                .ToListAsync();
+
+            int remainingQuantityToWithdraw = model.Quantity;
+            foreach (var stock in stocksToDeplete)
+            {
+                if (remainingQuantityToWithdraw <= 0) break; // Stok yang diminta sudah terpenuhi
+
+                if (stock.Quantity >= remainingQuantityToWithdraw)
+                {
+                    // Jika stok saat ini cukup untuk memenuhi sisa yang diminta
+                    stock.Quantity -= remainingQuantityToWithdraw;
+                    remainingQuantityToWithdraw = 0;
+                    _context.Update(stock); // Update stok yang tersisa
+                }
+                else
+                {
+                    // Jika stok saat ini tidak cukup, habiskan stok ini dan lanjut ke yang berikutnya
+                    remainingQuantityToWithdraw -= stock.Quantity;
+                    _context.StockItems.Remove(stock); // Hapus stok jika sudah habis
+                }
+            }
+
+            // Cek apakah semua kuantitas yang diminta berhasil ditarik
+            if (remainingQuantityToWithdraw > 0)
+            {
+                // Ini berarti jumlah stok yang tersedia tidak mencukupi
+                ModelState.AddModelError(string.Empty, $"Stok tidak mencukupi. Tersedia hanya {model.Quantity - remainingQuantityToWithdraw} unit.");
+                var chemicalItems = await _context.MasterItems
+                    .Where(m => m.Category == "Chemical")
+                    .OrderBy(m => m.ItemName)
+                    .ToListAsync();
+                ViewData["MasterItemID"] = new SelectList(chemicalItems, "ItemID", "ItemName", model.MasterItemID);
+                return View(model);
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(ChemicalStockItem));
+        }
         private bool StockItemExists(int id)
         {
-        return _context.StockItems.Any(e => e.Id == id);
+            return _context.StockItems.Any(e => e.Id == id);
         }
     }
 }
