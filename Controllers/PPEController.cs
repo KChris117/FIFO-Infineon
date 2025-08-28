@@ -24,6 +24,13 @@ namespace FIFO_Infineon.Controllers
                 .Include(s => s.MasterItem)
                 .OrderBy(s => s.EntryDate)
                 .ToListAsync();
+            var chartData = stockList.GroupBy(s => s.MasterItem !.ItemName).Select(g => new
+            {
+                ItemName = g.Key,
+                TotalQuantity = g.Sum(s => s.Quantity)
+            }).ToList();
+
+            ViewBag.ChartLabels = chartData.Select(d => d.ItemName).ToList(); ViewBag.ChartData = chartData.Select(d => d.TotalQuantity).ToList();
             return View(stockList);
         }
 

@@ -48,20 +48,32 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlzcG9zYWxcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/File Magang/FIFO-Infineon/Views/Disposal/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlzcG9zYWxcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/File Magang/FIFO-Infineon/Views/Disposal/DisposalStockItem.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlzcG9zYWxcRGlzcG9zYWxTdG9ja0l0ZW0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/File Magang/FIFO-Infineon/Views/Disposal/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlzcG9zYWxcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/File Magang/FIFO-Infineon/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/File Magang/FIFO-Infineon/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/File Magang/FIFO-Infineon/Views/PPE/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUFBFXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/File Magang/FIFO-Infineon/Views/PPE/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUFBFXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/File Magang/FIFO-Infineon/Views/PPE/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUFBFXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/File Magang/FIFO-Infineon/Views/PPE/PPEStockItem.cshtml]
@@ -86,6 +98,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/File Magang/FIFO-Infineon/Views/Tool/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9vbFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/File Magang/FIFO-Infineon/Views/Tool/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9vbFxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/File Magang/FIFO-Infineon/Views/Tool/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9vbFxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/File Magang/FIFO-Infineon/Views/Tool/ToolStockItem.cshtml]

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FIFO-Infineon")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f3d913d48729e5002ebde469aceb755c996bacc8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d36f55711709a76b1f2e0f60ec4cb07a4362180c")]
 [assembly: System.Reflection.AssemblyProductAttribute("FIFO-Infineon")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FIFO-Infineon")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

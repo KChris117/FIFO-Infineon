@@ -60,3 +60,37 @@
         }
     </tbody>
 </table>
+<div class="mt-5">
+    <h1 class="display-4">Stock Chart - Chemical</h1>
+    <canvas id="stockChart"></canvas>
+    </div>
+    
+    @section Scripts {
+    <script>
+        // Ambil data dari ViewBag
+        var labels = @Html.Raw(Json.Serialize(ViewBag.ChartLabels));
+        var data = @Html.Raw(Json.Serialize(ViewBag.ChartData));
+
+        var ctx = document.getElementById('stockChart').getContext('2d');
+        var stockChart = new Chart(ctx, {
+            type: 'line', // Mengubah tipe grafik menjadi 'line'
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Total Kuantitas',
+                    data: data,
+                    fill: false,
+                    borderColor: 'rgb(10, 130, 118)', // Warna hijau tua
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+}

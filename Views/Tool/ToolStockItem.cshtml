@@ -60,3 +60,37 @@
         }
     </tbody>
 </table>
+<div class="mt-5">
+    <h1 class="display-4">Stock Chart - Tool</h1>
+    <canvas id="stockChart"></canvas>
+    </div>
+
+    @section Scripts {
+        <script>
+            // Ambil data dari ViewBag
+            var labels = @Html.Raw(Json.Serialize(ViewBag.ChartLabels));
+            var data = @Html.Raw(Json.Serialize(ViewBag.ChartData));
+
+            var ctx = document.getElementById('stockChart').getContext('2d');
+            var stockChart = new Chart(ctx, {
+                type: 'bar', // Anda bisa ganti menjadi 'line' atau 'pie'
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Total Quantity',
+                        data: data,
+                        backgroundColor: 'rgba(10, 130, 118, 0.5)',
+                        borderColor: 'rgba(10, 130, 118, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+    }
