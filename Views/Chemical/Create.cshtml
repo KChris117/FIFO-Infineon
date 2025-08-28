@@ -1,43 +1,40 @@
 @model FIFO_Infineon.Models.StockItem
 @{
-    ViewData["Title"] = "Tambah Stok Chemical";
+    ViewData["Title"] = "Add Chemical Stock";
 }
 
 <h1>@ViewData["Title"]</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             
             <div class="form-group mb-2">
                 <label asp-for="MasterItemID">Item ID</label>
                 <select asp-for="MasterItemID" class="form-control" asp-items="ViewBag.MasterItemID">
-                    <option value="">-- Choose Item --</option>
+                    <option value="">-- Choose Item ID --</option>
                 </select>
             </div>
             
             <div class="form-group mb-2">
-                <label>Nama Item</label>
-                <input id="namaItem" class="form-control" readonly style="background-color: #e9ecef; cursor: not-allowed;" />
+                <label>Item Name</label>
+                <input id="itemName" class="form-control" readonly style="background-color: #e9ecef; cursor: not-allowed;" />
             </div>
             
             <div class="form-group mb-2">
-                <label>Deskripsi</label>
-                <textarea id="deskripsiItem" class="form-control" readonly style="background-color: #e9ecef; cursor: not-allowed;"></textarea>
+                <label>Item Description</label>
+                <textarea id="itemDescription" class="form-control" readonly style="background-color: #e9ecef; cursor: not-allowed;"></textarea>
             </div>
             
             <div class="form-group mb-2">
-                <label asp-for="Jumlah"></label>
-                <input asp-for="Jumlah" class="form-control" placeholder="0" />
+                <label asp-for="Quantity">Quantity</label>
+                <input asp-for="Quantity" class="form-control" placeholder="0" />
             </div>
             
             <div class="form-group">
-                <input type="submit" value="Simpan" class="btn btn-primary" />
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Simpan" class="btn btn-custom-primary" />
-                <a asp-action="ChemicalStockItem" class="btn btn-outline-secondary">Batal</a>
+                <input type="submit" value="Save" class="btn btn-custom-primary me-2" />
+                <a asp-action="ChemicalStockItem" class="btn btn-outline-secondary">Cancel</a>
             </div>
         </form>
     </div>
@@ -50,20 +47,21 @@
             var itemId = $(this).val();
             if (itemId) {
                 $.ajax({
-                    url: '@Url.Action("GetItemDetails", "Stock")',
-                    type: 'GET', data: { id: itemId },
+                    url: '@Url.Action("GetItemDetails", "Chemical")',
+                    type: 'GET',
+                    data: { id: itemId },
                     success: function (data) {
-                        $("#namaItem").val(data.namaItem);
-                        $("#deskripsiItem").val(data.deskripsiItem);
+                        $("#itemName").val(data.itemName);
+                        $("#itemDescription").val(data.itemDescription);
                     },
                     error: function () {
-                        $("#namaItem").val('Item tidak ditemukan'); 
-                        $("#deskripsiItem").val('Silakan pilih ulang');
+                        $("#itemName").val('Item Not Found'); 
+                        $("#itemDescription").val('Please choose again');
                     }
                 });
             } else {
-                $("#namaItem").val('');
-                $("#deskripsiItem").val('');
+                $("#itemName").val('');
+                $("#itemDescription").val('');
             }
         });
     });

@@ -15,7 +15,7 @@ namespace FIFO_Infineon.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var stockList = await _context.StockItems.Include(s => s.MasterItem).OrderBy(s => s.TanggalMasuk).ToListAsync();
+            var stockList = await _context.StockItems.Include(s => s.MasterItem).OrderBy(s => s.EntryDate).ToListAsync();
             return View(stockList);
         }
 
@@ -23,12 +23,12 @@ namespace FIFO_Infineon.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MasterItemID,Jumlah,MasterItem.Kategori")] StockItem stockItem)
+        public async Task<IActionResult> Create([Bind("MasterItemID,Quantity,MasterItem.Category")] StockItem stockItem)
         {
             ModelState.Remove("MasterItem");
             if (ModelState.IsValid)
             {
-                stockItem.TanggalMasuk = DateTime.Now;
+                stockItem.EntryDate = DateTime.Now;
                 _context.Add(stockItem);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -42,7 +42,7 @@ namespace FIFO_Infineon.Controllers
             if (string.IsNullOrEmpty(id)) return NotFound();
             var masterItem = await _context.MasterItems.FindAsync(id);
             if (masterItem == null) return NotFound();
-            return Json(new { namaItem = masterItem.NamaItem, deskripsiItem = masterItem.DeskripsiItem });
+            return Json(new { itemName = masterItem.ItemName, itemDescription = masterItem.ItemDescription });
         }
     }
 }

@@ -20,9 +20,9 @@ namespace FIFO_Infineon.Controllers
         public async Task<IActionResult> ChemicalStockItem()
         {
             var stockList = await _context.StockItems
-                .Where(s => s.MasterItem != null && s.MasterItem.Kategori == "Chemical")
+                .Where(s => s.MasterItem != null && s.MasterItem.Category == "Chemical")
                 .Include(s => s.MasterItem)
-                .OrderBy(s => s.TanggalMasuk)
+                .OrderBy(s => s.EntryDate)
                 .ToListAsync();
             return View(stockList);
         }
@@ -30,7 +30,7 @@ namespace FIFO_Infineon.Controllers
         public IActionResult Create()
         {
             var chemicalItems = _context.MasterItems
-                .Where(m => m.Kategori == "Chemical")
+                .Where(m => m.Category == "Chemical")
                 .OrderBy(m => m.ItemID)
                 .ToList();
 
@@ -42,7 +42,7 @@ namespace FIFO_Infineon.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MasterItemID,Jumlah")] StockItem stockItem)
+        public async Task<IActionResult> Create([Bind("MasterItemID,Quantity")] StockItem stockItem)
         {
             var existingMasterItem = await _context.MasterItems.FindAsync(stockItem.MasterItemID);
 
@@ -53,9 +53,9 @@ namespace FIFO_Infineon.Controllers
                 var newMasterItem = new MasterItem
                 {
                     ItemID = stockItem.MasterItemID,
-                    NamaItem = "Nama Item Belum Ditentukan",
-                    DeskripsiItem = "Deskripsi Item Belum Ditentukan",
-                    Kategori = "Chemical",
+                    ItemName = "Nama Item Belum Ditentukan",
+                    ItemDescription = "Deskripsi Item Belum Ditentukan",
+                    Category = "Chemical",
                 };
                 _context.MasterItems.Add(newMasterItem);
                 await _context.SaveChangesAsync(); // Simpan MasterItem yang baru dibuat
@@ -69,7 +69,7 @@ namespace FIFO_Infineon.Controllers
             ModelState.Remove("MasterItem");
             if (ModelState.IsValid)
             {
-                stockItem.TanggalMasuk = DateTime.Now;
+                stockItem.EntryDate = DateTime.Now;
                 _context.Add(stockItem);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(ChemicalStockItem));
@@ -139,12 +139,12 @@ namespace FIFO_Infineon.Controllers
             if (string.IsNullOrEmpty(id)) return NotFound();
             var masterItem = await _context.MasterItems.FindAsync(id);
             if (masterItem == null) return NotFound();
-            return Json(new { namaItem = masterItem.NamaItem, deskripsiItem = masterItem.DeskripsiItem });
+            return Json(new { itemName = masterItem.ItemName, itemDescription = masterItem.ItemDescription });
         }
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Jumlah")] StockItem stockItem)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Quantity")] StockItem stockItem)
         {
             if (id != stockItem.Id)
             {
@@ -162,7 +162,7 @@ namespace FIFO_Infineon.Controllers
             }
 
             // Perbarui properti yang dibutuhkan
-            itemToUpdate.Jumlah = stockItem.Jumlah;
+            itemToUpdate.Quantity = stockItem.Quantity;
             
             try
             {

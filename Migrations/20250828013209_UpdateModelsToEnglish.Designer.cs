@@ -4,6 +4,7 @@ using FIFO_Infineon.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FIFO_Infineon.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250828013209_UpdateModelsToEnglish")]
+    partial class UpdateModelsToEnglish
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,13 +30,13 @@ namespace FIFO_Infineon.Migrations
                     b.Property<string>("ItemID")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("Category")
+                    b.Property<string>("DeskripsiItem")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ItemDescription")
+                    b.Property<string>("Kategori")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ItemName")
+                    b.Property<string>("NamaItem")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -53,14 +56,14 @@ namespace FIFO_Infineon.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("EntryDate")
-                        .HasColumnType("datetime(6)");
+                    b.Property<int>("Jumlah")
+                        .HasColumnType("int");
 
                     b.Property<string>("MasterItemID")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("TanggalMasuk")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 

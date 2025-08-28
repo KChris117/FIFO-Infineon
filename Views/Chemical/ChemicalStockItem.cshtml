@@ -1,33 +1,30 @@
 @model IEnumerable<FIFO_Infineon.Models.StockItem>
 @{
-    ViewData["Title"] = "Stok Barang - Chemical";
+    ViewData["Title"] = "Item Stock - Chemical";
 }
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h1 class="display-4">@ViewData["Title"]</h1>
     <div>
         <a asp-action="Create" class="btn btn-primary me-2">
-            <i class="fas fa-plus-circle"></i> Tambah Barang
-        </a>
-        <a asp-action="Keluar" class="btn btn-danger">
-            <i class="fas fa-minus-circle"></i> Keluarkan Barang
+            <i class="fas fa-plus-circle"></i> Add Item
         </a>
     </div>
 </div>
 
 <p class="text-muted">
-    Berikut adalah daftar stok barang kategori Chemical. Stok diurutkan berdasarkan tanggal masuk.
+    The following is a list of stock items in the chemical category. Stock is sorted by date received
 </p>
 
 <table class="table table-striped table-hover">
     <thead class="table-dark">
         <tr>
             <th>Item ID</th>
-            <th>Nama Barang</th>
-            <th>Deskripsi</th>
-            <th>Jumlah</th>
-            <th>Tanggal Masuk</th>
-            <th>Aksi</th>
+            <th>Item Name</th>
+            <th>Description Item</th>
+            <th>Quantity</th>
+            <th>Entry Date</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -40,20 +37,20 @@
                 <td>
                     @if (item.MasterItem != null)
                     {
-                        @item.MasterItem.NamaItem
+                        @item.MasterItem.ItemName
                     }
                 </td>
                 <td>
                     @if (item.MasterItem != null)
                     {
-                        @item.MasterItem.DeskripsiItem
+                        @item.MasterItem.ItemDescription
                     }
                 </td>
                 <td>
-                    @item.Jumlah
+                    @item.Quantity
                 </td>
                 <td>
-                    @item.TanggalMasuk.ToString("g")
+                    @item.EntryDate.ToString("g")
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Edit</a>
