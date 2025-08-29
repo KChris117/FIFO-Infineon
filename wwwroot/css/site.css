@@ -126,6 +126,20 @@ body.sidebar-open {
   transition: margin-left .5s ease-in-out;
 }
 
+.sidebar a.logout-link {
+  color: #dc3545; /* Warna merah Bootstrap */
+}
+
+.sidebar a.logout-link:hover {
+  color: #fff; /* Teks menjadi putih */
+  background-color: #dc3545; /* Latar belakang menjadi merah */
+}
+
+/* Menengahkan teks secara vertikal di dalam sel tabel */
+.table tbody td {
+    vertical-align: middle;
+}
+
 body {
   transition: margin-left .5s ease-in-out;
 }
