@@ -30,6 +30,12 @@ namespace FIFO_Infineon.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
+        public IActionResult AdminDashboard()
+        {
+            return View();
+        }
+
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetStockData()

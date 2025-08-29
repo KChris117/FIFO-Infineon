@@ -10,5 +10,6 @@ namespace FIFO_Infineon.Models
         public string? BadgeNumber { get; set; }
         [Required]
         public string? Name { get; set; }
+        public string? Role { get; set; }
     }
 }

@@ -30,7 +30,7 @@ namespace FIFO_Infineon.Controllers
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Name!),
-                new Claim(ClaimTypes.Role, "Admin"), // Anda bisa sesuaikan peran di sini
+                new Claim(ClaimTypes.Role, user.Role!), // Mengambil peran dari database
                 new Claim("BadgeNumber", user.BadgeNumber!)
             };
 
@@ -39,11 +39,13 @@ namespace FIFO_Infineon.Controllers
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
 
-            if (Url.IsLocalUrl(returnUrl))
+            // Mengarahkan berdasarkan peran setelah login berhasil
+            if (user.Role == "Admin")
             {
-                return Redirect(returnUrl);
+                return RedirectToAction("AdminDashboard", "Home");
             }
 
+            // Pengguna biasa akan diarahkan ke sini
             return RedirectToAction("Dashboard", "Home");
         }
 
