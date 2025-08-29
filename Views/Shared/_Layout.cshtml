@@ -4,66 +4,85 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Inventory Management</title>
-    <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/FIFO_Infineon.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="~/FIFO-Infineon.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <button class="btn" style="margin-right: 10px;" id="sidebarToggle">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                @if (User.Identity!.IsAuthenticated)
+                {
+                    <button class="btn" id="openSidebarBtn" onclick="openNav()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                }
+                <a class="navbar-brand ms-3" asp-area="" asp-controller="Home" asp-action="Index">
                     <img src="~/Infineon-Logo.jpg" alt="Infineon Logo" style="height: 40px; margin-right: 10px;">Inventory Management</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1"></ul>
+                <div class="d-flex justify-content-end w-100">
+                    <ul class="navbar-nav">
+                        @if (User.Identity!.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <span class="nav-link text-dark">Welcome, @User.Identity.Name</span>
+                            </li>
+                        }
+                    </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="sidebar" id="sidebar">
-        <a asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i>Home</a>
-        <a asp-controller="Stock" asp-action="Index"><i class="fas fa-boxes"></i>Item</a>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div id="mySidebar" class="sidebar">
+        <a asp-controller="Home" asp-action="Dashboard"><i class="fas fa-home"></i>Dashboard</a>
+        <a asp-controller="Stock" asp-action="Index"><i class="fas fa-box"></i>Item</a>
+            <a href="#" onclick="document.getElementById('logoutForm').submit(); return false;">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
     </div>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+        <form id="logoutForm" asp-controller="Account" asp-action="Logout" method="post" class="d-none"></form>
+    }
+
+    <div id="main" class="main-content">
+        @RenderBody()
     </div>
-    <footer class="border-top footer text-muted mt-5">
+
+    <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2025 - Inventory Management </a>
+            &copy; 2025 - Inventory Management</a>
         </div>
     </footer>
-    <script>
-        function openNav() {
-            document.getElementById("sidebar").style.width = "250px";
-            document.body.classList.add("sidebar-open");
-        }
-        function closeNav(){
-            document.getElementById("sidebar").style.width = "0";
-            document.body.classList.remove("sidebar-open");
-        }
-        document.getElementById("sidebarToggle").onclick = openNav;
-        document.addEventListener("click", function(event) {
-            var sidebar = document.getElementById('sidebar');
-            var sidebarToggle = document.getElementById('sidebarToggle');
-            if (! sidebar.contains(event.target) && ! sidebarToggle.contains(event.target)) {
-                closeNav();
-            }
-        });
-    </script>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px";
+            document.body.classList.add('sidebar-open');
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.body.classList.remove('sidebar-open');
+        }
+
+        // Close the sidebar if the user clicks outside of it
+        document.addEventListener('click', function (event) {
+            var sidebar = document.getElementById("mySidebar");
+            var openBtn = document.getElementById("openSidebarBtn");
+
+            if (sidebar.style.width === "250px" && !sidebar.contains(event.target) && !openBtn.contains(event.target)) {
+                closeNav();
+            }
+        });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

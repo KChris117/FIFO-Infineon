@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FIFO_Infineon.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250826085808_AddKategoriToMasterItem")]
-    partial class AddKategoriToMasterItem
+    [Migration("20250829025713_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,13 +30,13 @@ namespace FIFO_Infineon.Migrations
                     b.Property<string>("ItemID")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("DeskripsiItem")
+                    b.Property<string>("Category")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Kategori")
+                    b.Property<string>("ItemDescription")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("NamaItem")
+                    b.Property<string>("ItemName")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -56,20 +56,41 @@ namespace FIFO_Infineon.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Jumlah")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("EntryDate")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("MasterItemID")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<DateTime>("TanggalMasuk")
-                        .HasColumnType("datetime(6)");
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("MasterItemID");
 
                     b.ToTable("StockItems");
+                });
+
+            modelBuilder.Entity("FIFO_Infineon.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BadgeNumber")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("FIFO_Infineon.Models.StockItem", b =>

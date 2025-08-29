@@ -69,6 +69,27 @@ namespace FIFO_Infineon.Migrations
                     b.ToTable("StockItems");
                 });
 
+            modelBuilder.Entity("FIFO_Infineon.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BadgeNumber")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("FIFO_Infineon.Models.StockItem", b =>
                 {
                     b.HasOne("FIFO_Infineon.Models.MasterItem", "MasterItem")

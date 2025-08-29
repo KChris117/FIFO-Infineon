@@ -5,9 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 using System;
+using Microsoft.AspNetCore.Authorization; // Tambahkan baris ini
 
 namespace FIFO_Infineon.Controllers
 {
+    [Authorize] // Tambahkan atribut ini untuk melindungi seluruh controller
     public class StockController : Controller
     {
         private readonly ApplicationDbContext _context;

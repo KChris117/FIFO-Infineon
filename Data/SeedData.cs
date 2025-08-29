@@ -11,7 +11,19 @@ namespace FIFO_Infineon.Data
                 serviceProvider.GetRequiredService<
                     DbContextOptions<ApplicationDbContext>>()))
             {
-                // Periksa apakah tabel MasterItem sudah memiliki data
+                if (context.Users.Any())
+                {
+                    return;
+                }
+                context.Users.AddRange(
+                    new User
+                    {
+                        BadgeNumber = "12345678",
+                        Name = "Admin"
+                    }
+                );
+                context.SaveChanges();
+
                 if (context.MasterItems.Any())
                 {
                     return; // Database sudah berisi data
@@ -21,14 +33,14 @@ namespace FIFO_Infineon.Data
                     // Tambahkan data MasterItem untuk kategori Chemical
                     new MasterItem
                     {
-                        ItemID = "CHM-001",
+                        ItemID = "CHM-00001",
                         ItemName = "H2SO4",
                         ItemDescription = "Sulphuric Acid",
                         Category = "Chemical"
                     },
                     new MasterItem
                     {
-                        ItemID = "CHM-002",
+                        ItemID = "CHM-00002",
                         ItemName = "NaOH",
                         ItemDescription = "Sodium Hydroxide",
                         Category = "Chemical"
@@ -36,23 +48,23 @@ namespace FIFO_Infineon.Data
                     // Anda bisa menambahkan data untuk kategori Disposal, PPE, dan Tool di sini juga
                     new MasterItem
                     {
-                        ItemID = "DSP-001",
-                        ItemName = "Masker",
-                        ItemDescription = "Masker sekali pakai",
+                        ItemID = "DSP-00001",
+                        ItemName = "Mask",
+                        ItemDescription = "Disposal Mask",
                         Category = "Disposal"
                     },
                     new MasterItem
                     {
-                        ItemID = "PPE-001",
-                        ItemName = "Sarung Tangan",
-                        ItemDescription = "Sarung Tangan Karet",
+                        ItemID = "PPE-00001",
+                        ItemName = "Gloves",
+                        ItemDescription = "Rubber Gloves",
                         Category = "PPE"
                     },
                     new MasterItem
                     {
-                        ItemID = "TOOL-001",
-                        ItemName = "Obeng",
-                        ItemDescription = "Obeng Philips",
+                        ItemID = "TOOL-00001",
+                        ItemName = "Screwdriver",
+                        ItemDescription = "Philips Screwdriver",
                         Category = "Tool"
                     }
                 );

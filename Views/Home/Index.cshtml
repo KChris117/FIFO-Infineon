@@ -5,8 +5,46 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Please login or register your data here to view the inventory</p>
-    <div class-"mt-4">
-        <a asp-controller="Stock" asp-action="Index" class="btn btn-custom-primary btn-lg">Login</a>
-        <a asp-controller="Stock" asp-action="Index" class="btn btn-custom-primary btn-lg">Register</a>
+    <div class="mt-4">
+        <button type="button" class="btn btn-custom-primary btn-lg" data-bs-toggle="modal" data-bs-target="#loginModal">
+            Login
+        </button>
+        <button type="button" class="btn btn-custom-primary btn-lg" data-bs-toggle="modal" data-bs-target="#loginModal">
+            Register
+        </button>
     </div>
 </div>
+
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Login / Register</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-controller="Account" asp-action="Login" method="post">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="badgeNumber" class="form-label">Badge Number</label>
+                        <input type="text" class="form-control" id="badgeNumber" name="badgeNumber" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-custom-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger mt-3" role="alert">
+        @TempData["ErrorMessage"]
+    </div>
+}
