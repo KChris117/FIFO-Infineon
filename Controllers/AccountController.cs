@@ -1,58 +1,59 @@
-using FIFO_Infineon.Data;
+using FIFO_Infineon.Models;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace FIFO_Infineon.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public AccountController(ApplicationDbContext context)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
-            _context = context;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         [HttpPost]
         public async Task<IActionResult> Login(string badgeNumber, string username, string returnUrl = null!)
         {
-            var user = _context.Users.FirstOrDefault(u => u.BadgeNumber == badgeNumber && u.Name == username);
-
-            if (user == null)
+            // Ubah input string menjadi int untuk badgeNumber
+            if (!int.TryParse(badgeNumber, out int badgeNumberInt))
             {
-                // Gagal login
+                TempData["ErrorMessage"] = "Invalid Badge Number format.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            var user = await _userManager.FindByNameAsync(username);
+
+            if (user == null || user.BadgeNumber != badgeNumberInt)
+            {
                 TempData["ErrorMessage"] = "Badge number or username is incorrect.";
                 return RedirectToAction("Index", "Home");
             }
 
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, user.Name!),
-                new Claim(ClaimTypes.Role, user.Role!), // Mengambil peran dari database
-                new Claim("BadgeNumber", user.BadgeNumber!)
-            };
+            // Gunakan SignInManager untuk login (tanpa password untuk kasus ini)
+            await _signInManager.SignInAsync(user, isPersistent: false);
 
-            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            var authProperties = new AuthenticationProperties();
-
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+            var roles = await _userManager.GetRolesAsync(user);
 
             // Mengarahkan berdasarkan peran setelah login berhasil
-            if (user.Role == "Admin")
+            if (roles.Contains("Admin"))
             {
                 return RedirectToAction("AdminDashboard", "Home");
             }
 
-            // Pengguna biasa akan diarahkan ke sini
             return RedirectToAction("Dashboard", "Home");
         }
 
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
     }

@@ -1,26 +1,22 @@
-using Microsoft.EntityFrameworkCore;
 using FIFO_Infineon.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore; // <-- Ganti using
+using Microsoft.EntityFrameworkCore;
 
 namespace FIFO_Infineon.Data
 {
-    public class ApplicationDbContext : DbContext
+    // Ganti DbContext menjadi IdentityDbContext<User>
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
+        {
+        }
+        
+        // DbSet untuk model Anda yang lain tetap di sini
         public DbSet<MasterItem> MasterItems { get; set; }
         public DbSet<StockItem> StockItems { get; set; }
-        public DbSet<User> Users { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<StockItem>()
-            .HasOne(s => s.MasterItem)
-            .WithMany()
-            .HasForeignKey(s => s.MasterItemID);
-
-            modelBuilder.Entity<MasterItem>()
-            .HasIndex(m => m.ItemID)
-            .IsUnique();
-        }
+        
+        // Anda TIDAK PERLU lagi menambahkan "public DbSet<User> Users { get; set; }"
+        // karena itu sudah disediakan oleh IdentityDbContext.
     }
 }

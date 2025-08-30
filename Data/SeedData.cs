@@ -11,62 +11,20 @@ namespace FIFO_Infineon.Data
                 serviceProvider.GetRequiredService<
                     DbContextOptions<ApplicationDbContext>>()))
             {
-                if (context.Users.Any())
-                {
-                    return;
-                }
-                context.Users.AddRange(
-                    new User
-                    {
-                        BadgeNumber = "12345678",
-                        Name = "Admin"
-                    }
-                );
-                context.SaveChanges();
-
+                // Logic untuk seeding User sudah dipindahkan sepenuhnya ke DbInitializer.
+                
+                // Cek apakah MasterItems sudah ada isinya.
                 if (context.MasterItems.Any())
                 {
-                    return; // Database sudah berisi data
+                    return; // Database sudah berisi data MasterItem
                 }
 
                 context.MasterItems.AddRange(
-                    // Tambahkan data MasterItem untuk kategori Chemical
-                    new MasterItem
-                    {
-                        ItemID = "CHM-00001",
-                        ItemName = "H2SO4",
-                        ItemDescription = "Sulphuric Acid",
-                        Category = "Chemical"
-                    },
-                    new MasterItem
-                    {
-                        ItemID = "CHM-00002",
-                        ItemName = "NaOH",
-                        ItemDescription = "Sodium Hydroxide",
-                        Category = "Chemical"
-                    },
-                    // Anda bisa menambahkan data untuk kategori Disposal, PPE, dan Tool di sini juga
-                    new MasterItem
-                    {
-                        ItemID = "DSP-00001",
-                        ItemName = "Mask",
-                        ItemDescription = "Disposal Mask",
-                        Category = "Disposal"
-                    },
-                    new MasterItem
-                    {
-                        ItemID = "PPE-00001",
-                        ItemName = "Gloves",
-                        ItemDescription = "Rubber Gloves",
-                        Category = "PPE"
-                    },
-                    new MasterItem
-                    {
-                        ItemID = "TOOL-00001",
-                        ItemName = "Screwdriver",
-                        ItemDescription = "Philips Screwdriver",
-                        Category = "Tool"
-                    }
+                    new MasterItem { ItemID = "CHM-00001", ItemName = "H2SO4", ItemDescription = "Sulphuric Acid", Category = "Chemical" },
+                    new MasterItem { ItemID = "CHM-00002", ItemName = "NaOH", ItemDescription = "Sodium Hydroxide", Category = "Chemical" },
+                    new MasterItem { ItemID = "DSP-00001", ItemName = "Mask", ItemDescription = "Disposal Mask", Category = "Disposal" },
+                    new MasterItem { ItemID = "PPE-00001", ItemName = "Gloves", ItemDescription = "Rubber Gloves", Category = "PPE" },
+                    new MasterItem { ItemID = "TOOL-00001", ItemName = "Screwdriver", ItemDescription = "Philips Screwdriver", Category = "Tool" }
                 );
                 context.SaveChanges();
             }

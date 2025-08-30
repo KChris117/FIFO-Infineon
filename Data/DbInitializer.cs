@@ -1,40 +1,53 @@
+using FIFO_Infineon.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace FIFO_Infineon.Data;
-
-public static class DbInitializer
+namespace FIFO_Infineon.Data
 {
-    public static async Task Initialize(IServiceProvider serviceProvider)
+    public static class DbInitializer
     {
-        var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
-        var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
-        // Daftar role yang kita inginkan
-        string[] roleNames = { "Admin", "User" };
-
-        foreach (var roleName in roleNames)
+        public static async Task Initialize(IServiceProvider serviceProvider)
         {
-            var roleExist = await roleManager.RoleExistsAsync(roleName);
-            if (!roleExist)
+            var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<User>>(); // <-- Meminta UserManager<User> yang benar
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+            // Pastikan database sudah dibuat
+            context.Database.EnsureCreated();
+
+            // 1. Buat Roles (Admin, User) jika belum ada
+            if (!await roleManager.RoleExistsAsync("Admin"))
             {
-                // Buat role jika belum ada
-                await roleManager.CreateAsync(new IdentityRole(roleName));
+                await roleManager.CreateAsync(new IdentityRole("Admin"));
             }
-        }
-
-        // Buat user admin default jika belum ada
-        var adminUser = await userManager.FindByEmailAsync("admin@infineon.com");
-        if (adminUser == null)
-        {
-            adminUser = new IdentityUser
+            if (!await roleManager.RoleExistsAsync("User"))
             {
-                UserName = "admin@infineon.com",
-                Email = "admin@infineon.com",
-                EmailConfirmed = true
-            };
-            // Ganti "Admin@123" dengan password yang lebih aman di aplikasi production
-            await userManager.CreateAsync(adminUser, "Admin@123");
-            await userManager.AddToRoleAsync(adminUser, "Admin");
+                await roleManager.CreateAsync(new IdentityRole("User"));
+            }
+
+            // 2. Buat Admin User jika belum ada
+            if (!context.Users.Any(u => u.UserName == "Admin"))
+            {
+                var adminUser = new User
+                {
+                    UserName = "Admin", // UserName digunakan untuk login
+                    Email = "admin@example.com", // Email wajib ada
+                    Name = "Admin",
+                    BadgeNumber = 12345678,
+                    EmailConfirmed = true
+                };
+
+                var result = await userManager.CreateAsync(adminUser); // Password tidak diperlukan untuk kasus ini
+
+                if (result.Succeeded)
+                {
+                    // Tetapkan role "Admin" ke user yang baru dibuat
+                    await userManager.AddToRoleAsync(adminUser, "Admin");
+                }
+            }
         }
     }
 }
